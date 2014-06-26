@@ -1,0 +1,33 @@
+class: http-example-exchange
+cols:
+- name: k
+  class: http-key
+- name: v
+  class: http-value
+
+data:
+  - k: Method
+    v: GET
+  - k: URL
+    v: __OAuth2 Authorization URL__
+  - k: Parameters
+    v:
+      cols:
+      - name: k
+      - name: v
+
+      class: http-example-params
+      data:
+        - k: client_id
+          v: |
+            IFTTT's client ID for your service as set in your channel configuration.
+            
+            wow!
+        - k: '`response_type`'
+          v: '`code`'
+        - k: '`scope`'
+          v: '`ifttt`'
+        - k: '`state`'
+          v: An anti-forgery token provided by IFTTT.
+        - k: redirect_uri
+          v: '`https://ifttt.com/channels/{{channel_slug}}/authorize`'
