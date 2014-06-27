@@ -30,11 +30,12 @@ module YamlTablerize
 
   class HTMLElement
     attr_accessor :tag
-    attr_reader :attrs, :children
+    attr_reader :attrs, :classes, :children
 
     def initialize(tag, opts = {})
       @tag = tag
-      @attrs = { 'class' => [] }
+      @attrs = {}
+      @classes = []
       @children = []
       add_class opts[:class] unless opts[:class].nil?
       @attrs.update opts[:attrs] unless opts[:attrs].nil?
@@ -52,8 +53,7 @@ module YamlTablerize
 
     def add_single_class(klass)
       return if klass.nil? || klass.empty?
-      classes = @attrs['class']
-      classes << klass unless classes.include? klass
+      @classes << klass unless @classes.include? klass
     end
 
     def inner_html
@@ -68,11 +68,8 @@ module YamlTablerize
 
     def attrs_html(attrs)
       out = ''
+      out << %( class="#{h @classes.join ' '}")  if @classes.length > 0
       attrs.each do |attr, value|
-        if attr == 'class'
-          next unless value.length > 0
-          value = value.join ' '
-        end
         out << %( #{attr}="#{h value}")
       end
       out
@@ -99,7 +96,7 @@ module YamlTablerize
       cols.each do |col|
         td = HTMLElement.new('td', class: col['class'])
         col_key = col['name']
-        if data['class'] && col_class_prefix = data['class'][0] # `=` not a typo
+        if col_class_prefix = table.classes[0] # `=` not a typo
           td.add_class "#{col_class_prefix}-#{col_key}"
         end
         cell = row[col_key]
