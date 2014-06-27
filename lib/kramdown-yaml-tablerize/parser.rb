@@ -14,6 +14,7 @@ module Kramdown
       # Do not use this method directly, it's used internally by Kramdown.
       # @api private
       def parse_yaml_table
+        begin_pos = @src.pos
         @src.pos += @src.matched_size
         @tree.children << Element.new(:yaml_table, @src[1])
       end

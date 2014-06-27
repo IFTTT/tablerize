@@ -88,7 +88,11 @@ module YamlTablerize
       tr = HTMLElement.new('tr', class: row['class'])
       cols.each do |col|
         td = HTMLElement.new('td', class: col['class'])
-        cell = row[col['name']]
+        col_key = col['name']
+        if data['class'] && col_class_prefix = data['class'][0] # `=` not a typo
+          td.add_class "#{col_class_prefix}-#{col_key}"
+        end
+        cell = row[col_key]
         if cell.is_a?(Hash)
           td.children << NEWLINE
           td.children << make_table(cell)
