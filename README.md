@@ -3,6 +3,26 @@ YAML Tablerize
 
 Convert YAML to HTML tables.
 
+Usage
+-----
+
+```shell
+cd yaml-tablerize
+make install
+```
+
+or (soon)
+
+```shell
+gem install yaml-tablerize
+```
+
+Then:
+
+```shell
+yaml-tablerize path/to/yaml-table.yaml [...]
+```
+
 Why?
 ----
 
