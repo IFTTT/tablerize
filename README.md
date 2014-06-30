@@ -85,7 +85,7 @@ Here's what it looks like as HTML, using a common Markdown stylesheet ("GitHub" 
 
 Here's an example that illustrates most of the features of Tablerize [test/example-2.yml](test/example-2.yml):
 
-```
+```yaml
 class: [http-spec-exchange, another-class] # this line is optional
 
 cols: # column specifications and ordering
