@@ -6,7 +6,7 @@ Convert YAML to HTML tables, either standalone or as a Kramdown plugin.
 Why?
 ----
 
-Markdown is nice. It helps you write formatted documents in plain text in a way that is meaningful even without rendering. One thing that [the original Markdown specification](http://daringfireball.net/projects/markdown/syntax) doesn't support is tables. But tables are a common thing to appear in Markdown documents, so Markdown libraries have come up with various but similar ways of representing tables in Markdown.
+Markdown is nice. It helps you write formatted documents in plain text in a way that is meaningful even without rendering. One thing that [the original Markdown specification](http://daringfireball.net/projects/markdown/syntax) doesn't support is tables. But many authors of Markdown documents want to write tables, so Markdown libraries have come up with various but similar ways of representing tables in Markdown.
 
 Tables exist to help you line things up. But Markdown tables force you to either line things up yourself, or deal with the unreadable results. Here's some table Markdown from the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet):
 
@@ -124,10 +124,10 @@ Usage
 
 ### kramdown plugin
 
-	require 'kramdown-gist'
+	require 'kramdown-yaml-tablerize'
 
     compile '*.md' do
-       filter :kramdown, { :input => 'KramdownGist' }
+       filter :kramdown, { :input => 'KramdownYamlTablerize' }
     end
 
 Tips & Caveats
