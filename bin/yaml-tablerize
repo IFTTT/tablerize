@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# The command line YAML Tablerize parser.
+
+if ARGV.empty?
+  $stderr.puts "usage: #{$PROGRAM_NAME} path/to/yaml-table.yaml [...]"
+  exit 1
+end
+
+THIS_FILE = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+begin
+  require File.dirname(THIS_FILE) + '/../lib/yaml-tablerize'
+rescue LoadError
+  require 'yaml-tablerize'
+end
+
+ARGV.each do |path|
+  puts YamlTablerize.load_file path
+end

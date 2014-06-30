@@ -1,7 +1,7 @@
-kramdown-yaml-tablerize (Tablerize)
-===================================
+YAML Tablerize
+==============
 
-Convert YAML to HTML tables, either standalone or as a Kramdown plugin.
+Convert YAML to HTML tables.
 
 Why?
 ----
@@ -36,99 +36,90 @@ Oh, and you can pretty much forget about nesting tables.
 So what is this?
 ----------------
 
-**Tablerize** solves these problems. In its purest form, it is a specification of a _human-readable representation of tables in plain text_.
+**Tablerize** solves these problems. In its purest form, it is a specification of a _human-readable representation of tables in plain text_. This project also includes a Ruby script to convert this YAML-based format into HTML tables. It can be run with:
 
-This project also includes a Ruby script to convert this YAML-based format into HTML tables, and a [kramdown](http://kramdown.gettalong.org/) plugin to allow such tables to be embedded in Markdown. Since the table is in YAML format,
+```shell
+yaml-tablerize path/to/yaml-table.yaml [...]
+```
+
+A complementary project, [kramdown-yaml-tablerize](https://github.com/IFTTT/kramdown-yaml-tablerize), allows embedding of YAML tables into kramdown Markdown documents.
 
 Format
 ------
 
-I searched for "statistics" on Google news just now and ended up with a neat little table in [a Forbes article](http://www.forbes.com/sites/gregorymcneal/2014/06/27/nsa-releases-new-statistical-details-about-surveillance/) I want to type up. Let's try it now: 
+I'm searching for "statistics" on Google news, and I find [a Forbes article](http://www.forbes.com/sites/gregorymcneal/2014/06/27/nsa-releases-new-statistical-details-about-surveillance/) with a neat little table I want to type up. Let's try it now: [test/example-1.yml](test/example-1.yml)
 
-    --- table ---
-    
-    class: [statistics-table, nsa-surveillance-details]
+```yaml
+class: [statistics-table, nsa-surveillance-details]
 
-    cols:
-    - class: col-header
-      name: authority
-    - name: num_orders
-    - name: num_targets
+cols:
+- name: authority
+- name: num_orders
+- name: num_targets
 
-    data:
-    - class: row-header
-      authority: Legal Authority
-      num_orders: Annual Number of Orders
-      num_targets: Estimated Number of Targets Affected
-    - authority: |
-                  __FISA Orders__  
-                  Based on probable cause (Title I and III of FISA, Sections 703 and 704 of FISA)
-      num_orders: "1,167 orders"
-      num_targets: "1,144"
-    - authority: |
-                  __Section 702__  
-                  of FISA
-      num_orders: "1 order"
-      num_targets: "89,138"
-    - authority: |
-                  __FISA Pen Register/Trap and Trace__  
-                  (Title IV of FISA)
-      num_orders: "131 orders"
-      num_targets: "319"
-    
-    --- /table ---
+data:
+- class: table-header
+  authority: Legal Authority
+  num_orders: Annual Number of Orders
+  num_targets: Estimated Number of Targets Affected
+- authority: |
+              __FISA Orders__  
+              Based on probable cause (Title I and III of FISA, Sections 703 and 704 of FISA)
+  num_orders: "1,167 orders"
+  num_targets: "1,144"
+- authority: |
+              __Section 702__  
+              of FISA
+  num_orders: "1 order"
+  num_targets: "89,138"
+- authority: |
+              __FISA Pen Register/Trap and Trace__  
+              (Title IV of FISA)
+  num_orders: "131 orders"
+  num_targets: "319"
+```
 
 Here's what it looks like as HTML, using a common Markdown stylesheet ("GitHub" on Mou/Macdown):
 
 ![screen shot 2014-06-27 at 11 45 56 pm](https://cloud.githubusercontent.com/assets/1570168/3420046/94909652-fe90-11e3-9330-7eafc78ef17a.png)
 
-Here's an example that illustrates most of the features of Tablerize:
+Here's an example that illustrates most of the features of Tablerize [test/example-2.yml](test/example-2.yml):
 
-    --- table --- # start tag for embedding in Kramdown
-    
-    class: my-special-table another-class # optional
-    
-    cols: # column specifications and ordering
-    - name: k # is used to identify the column below
-      class: http-key # is applied to each cell (td) in the column
+```
+class: [http-example-exchange, another-class] # this line is optional
+
+cols: # column specifications and ordering
+- name: k # is used to identify the column below
+  class: http-key # is applied to each cell (td) in the column
+- name: v
+  class: http-value
+
+data: # data, by row
+- v: GET # v corresponds to cols.1.name above
+  k: Method # k corresponds to cols.0.name above
+- k: Parameters # the order of the columns in data doesn't matter
+  v:
+    # nest tables by nesting another YAML dictionary, in the same format
+    class: http-example-params
+
+    cols:
+    - name: k
     - name: v
-      class: http-value
-    
-    data: # data, by row
-      - v: GET # v corresponds to cols[1].name above
-        k: Method # k corresponds to cols[0].name above
-      - k: Parameters # the order of the columns in data doesn't matter
-        v:
-          class: [http-example-params, classes-can-be-an-array-too]
-          
-          cols: # nest tables by nesting another YAML dictionary, in the same format
-          - name: k
-          - name: v
-          
-          data:
-            - k: '`client_id`' # backticks must be quoted, sorry!
-              v: |
-                IFTTT's client ID for your service as set in your channel configuration.
-                
-                wow!
-            # <p>...</p> only gets inserted if there are multiple paragraphs
-    
-    --- /table --- # end tag for embedding in Kramdown
 
-Usage
------
-
-### Command-line
-
-[example.yml](example.yml) is an example that can be converted with `ruby yaml_tablerize.rb example.yml`.
-
-### kramdown plugin
-
-	require 'kramdown-yaml-tablerize'
-
-    compile '*.md' do
-       filter :kramdown, { :input => 'KramdownYamlTablerize' }
-    end
+    data:
+    - k: '`client_id`' # backticks must be quoted!
+      v: |
+        A client ID for your service as set in your configuration.
+        <!-- blank line -->
+        a new line, wow! Let's see regular Markdown tables do that...
+    # <p>...</p> gets inserted only if there are multiple paragraphs
+    - k: '`response_type`'
+      v: '`code`'
+    - k: '`state`'
+      v: An anti-forgery token provided by the API.
+    - k: redirect_uri
+      v: '`https://redirect.example.com/api/{{your_service}}/authorize`'
+```
 
 Tips & Caveats
 --------------
@@ -144,12 +135,12 @@ Wish List
 
 - Support using representing two-column tables as key and value. YAML doesn't support ordered dictionaries, so this will be done by looking at the only key-value pair inside each dictionary in a list:
 
-        data:
-          - wake up: done
-          - brush teeth: done
-          - eat breakfast: not done
-
-- Support using custom delimiters for the start and end of the YAML. Find a custom delimiter that plays nicely with kramdown and markdown, i.e. one that renders the best when the plugin is not enabled. It should ideally also be easy for text editors to target in case anyone wants to make a syntax highlighter for it (which should involve little more than marking off a region of Markdown as YAML).
+  ```yaml
+  data:
+  - wake up: done
+  - brush teeth: done
+  - eat breakfast: not done
+  ```
 
 - Allow HTML attributes to be placed anywhere classes currently can.
 
@@ -161,11 +152,7 @@ Wish List
 
 - Allow outputting to Markdown, for GitHub and other sites that don't allow HTML in Markdown.
 
-- Improve interactive error handling, including outputting on which line of kramdown source the error occurred. Possibly also do some pre-emptive error checking for less confusion down the line.
-
 Credit
 ------
 
-The structure of [rfc1459/kramdown-gist](https://github.com/rfc1459/kramdown-gist) was used as a guideline for making this library.
-
-**Tablerize** was designed and written by [@szhu](https://github.com/szhu) at [@IFTTT](https://github.com/IFTTT).
+**YAML Tablerize** was designed and written by [@szhu](https://github.com/szhu) at [@IFTTT](https://github.com/IFTTT).

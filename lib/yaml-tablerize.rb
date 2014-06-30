@@ -1,14 +1,18 @@
 require 'yaml'
 require 'erb'
-require 'kramdown'
 include ERB::Util
 
-# Convert YAML to HTML tables. This file can be used by itself; the others are all for Kramdown support.
-
 module YamlTablerize
-  # Don't surround one-liners with <p>...</p>.
-  def self.kramdown(text)
-    html = Kramdown::Document.new(text).to_html.strip
+  # This method can easily be replaced to use any other Markdown library.
+  # As of now, you'll have to manually modify this method.
+  def self.markdown(text)
+    require 'kramdown'
+    Kramdown::Document.new(text).to_html.strip
+  end
+
+  # Process markdown, without surrounding one-liners with <p>...</p>.
+  def self.markdown_strip(text)
+    html = markdown text
     p_start = '<p>'
     p_end = '</p>'
     if html.start_with?(p_start) && html.end_with?(p_end) &&
@@ -96,7 +100,7 @@ module YamlTablerize
       cols.each do |col|
         td = HTMLElement.new('td', class: col['class'])
         col_key = col['name']
-        if col_class_prefix = table.classes[0] # `=` not a typo
+        if (col_class_prefix = table.classes[0])
           td.add_class "#{col_class_prefix}-#{col_key}"
         end
         cell = row[col_key]
@@ -105,7 +109,7 @@ module YamlTablerize
           td.children << make_table(cell)
           td.children << NEWLINE
         else
-          td.children << RawHTMLElement.new(kramdown cell)
+          td.children << RawHTMLElement.new(markdown_strip cell)
         end
         tr.children << td
       end
