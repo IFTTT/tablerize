@@ -86,7 +86,7 @@ Here's what it looks like as HTML, using a common Markdown stylesheet ("GitHub" 
 Here's an example that illustrates most of the features of Tablerize [test/example-2.yml](test/example-2.yml):
 
 ```
-class: [http-example-exchange, another-class] # this line is optional
+class: [http-spec-exchange, another-class] # this line is optional
 
 cols: # column specifications and ordering
 - name: k # is used to identify the column below
@@ -100,7 +100,7 @@ data: # data, by row
 - k: Parameters # the order of the columns in data doesn't matter
   v:
     # nest tables by nesting another YAML dictionary, in the same format
-    class: http-example-params
+    class: http-spec-params
 
     cols:
     - name: k
@@ -110,16 +110,20 @@ data: # data, by row
     - k: '`client_id`' # backticks must be quoted!
       v: |
         A client ID for your service as set in your configuration.
-        <!-- blank line -->
+        
         a new line, wow! Let's see regular Markdown tables do that...
     # <p>...</p> gets inserted only if there are multiple paragraphs
-    - k: '`response_type`'
+    - k: '`type`'
       v: '`code`'
     - k: '`state`'
       v: An anti-forgery token provided by the API.
     - k: redirect_uri
-      v: '`https://redirect.example.com/api/{{your_service}}/authorize`'
+      v: '`https://example.com/api/{{your_service}}/authorize`'
 ```
+
+With the right CSS, it becomes this:
+
+![screen shot 2014-06-30 at 1 55 35 pm](https://cloud.githubusercontent.com/assets/1570168/3435774/15108594-0099-11e4-8175-d820206c471e.png)
 
 Tips & Caveats
 --------------
