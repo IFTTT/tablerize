@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.homepage    = 'https://github.com/IFTTT/yaml-tablerize'
   gem.authors     = ['Sean Zhu']
   gem.email       = 'sean.zhu@ifttt.com'
-  # gem.license     = ''
+  gem.license     = 'IFTTT'
 
   gem.add_dependency 'kramdown', '~> 1.2', '>= 1.2.0'
   gem.files       = `git ls-files`.split($RS)
