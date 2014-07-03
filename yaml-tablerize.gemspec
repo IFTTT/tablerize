@@ -14,10 +14,10 @@ Gem::Specification.new do |gem|
   gem.homepage    = 'https://github.com/IFTTT/yaml-tablerize'
   gem.authors     = ['Sean Zhu']
   gem.email       = 'sean.zhu@ifttt.com'
-  gem.license     = 'IFTTT'
+  gem.license     = 'MIT'
 
   gem.add_dependency 'kramdown', '~> 1.2', '>= 1.2.0'
+  gem.executables = ['yaml-tablerize']
   gem.files       = `git ls-files`.split($RS)
   gem.require_paths = ['lib']
-  gem.executables = ['yaml-tablerize']
 end

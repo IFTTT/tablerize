@@ -6,6 +6,8 @@ Convert YAML to HTML tables.
 Usage
 -----
 
+### Installing
+
 ```shell
 cd yaml-tablerize
 make install
@@ -17,7 +19,19 @@ or (soon)
 gem install yaml-tablerize
 ```
 
-Then:
+### Ruby
+
+```ruby
+require 'yaml-tablerize'
+puts YamlTablerize.load_file(path).to_html
+# or
+puts YamlTablerize.load(yaml_string).to_html
+# or
+puts YamlTablerize.make_table(object_from_yaml_or_json).to_html
+```
+
+
+### Shell
 
 ```shell
 yaml-tablerize path/to/yaml-table.yaml [...]
@@ -49,14 +63,14 @@ Markdown | Less | Pretty
 
 Why is this less pretty? Because, while tables exist to organize data, the columns in the above might as well not exist.
 
-Depending what Markdown library you're using, the examples above might not even render. Many flavors of Markdown tables exist, in varying degrees of leniency. Not only does this make writing tables even harder ("which Markdown library am I using and does it support table feature X?"), but it suggests that these other libraries are just making concessions with representing a table in this way. Tables contain data, something that should be computer-readable, and make them human-readable. Markdown tables, sadly, usually are neither.
+Depending what Markdown library you're using, the examples above might not even render. Many flavors of Markdown tables exist, and accept table syntax in varying degrees of leniency. Not only does this make writing tables even harder ("which Markdown library am I using and does it support table feature X?"), but it suggests that these other libraries are just making concessions with the constraints of representing a table in this way. Tables take data, something that should be computer-readable, and make them human-readable. Unrendered Markdown tables, sadly, usually are neither.
 
-Oh, and you can pretty much forget about nesting tables.
+Oh, and with this traditional syntax, you can pretty much forget about nesting tables.
 
 So what is this?
 ----------------
 
-**Tablerize** solves these problems. In its purest form, it is a specification of a _human-readable representation of tables in plain text_. This project also includes a Ruby script to convert this YAML-based format into HTML tables. It can be run with:
+**Tablerize** solves these problems. In its purest form, it is a specification of a _human-readable representation of tables in plain text_. This project also includes a Ruby library and command-line tool to convert this YAML-based format into HTML tables. It can be run with:
 
 ```shell
 yaml-tablerize path/to/yaml-table.yaml [...]

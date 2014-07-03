@@ -14,5 +14,5 @@ rescue LoadError
 end
 
 ARGV.each do |path|
-  puts YamlTablerize.load_file path
+  puts YamlTablerize.load_file(path).to_html
 end
