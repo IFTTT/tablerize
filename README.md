@@ -162,11 +162,11 @@ With the right CSS, it becomes this:
 Tips & Caveats
 --------------
 
-- Backticks `` ` `` and some other characters need to be quoted because YAML doesn't allow them. Other suspicious characters include commas `,`, ampersands `&`, and asterisks `*` and have been implicated in similar crimes. If readability isn't an issue and there's been a syntax error spree in your area, you can go ahead and quote every string just be safe.
+- YAML tip: Backticks `` ` `` and some other characters need to be quoted because they have special meaing in YAML or are otherwise not allowed to be unquoted by YAML. Other suspicious characters include commas `,`, ampersands `&`, and asterisks `*` and have been implicated in similar crimes. If readability isn't an issue and there's been a syntax error spree in your area, you can go ahead and quote every string just be safe.
 
 - Don't use `class` as a column name, since it is used for classes. Unless you really want to. In which case you can. But it still will be used for classes.
 
-- As a convenience, if a table has a class `my-table` and a column is named `column-1`, then all the cells in the column will have the class `my-table-column-1`. This only happens for the first class listed
+- Auto column classes: As a convenience, if a table has a class `my-table` and a column is named `column-1`, then all the cells in the column will have the class `my-table-column-1`. This only happens for the first table class listed. If you don't want this to happen, make the first table class `null`; it will be ignored and columns will not have automatically-generated classes.
 
 Wish List
 ---------
