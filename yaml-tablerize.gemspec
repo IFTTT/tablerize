@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
 
   gem.homepage    = 'https://github.com/IFTTT/yaml-tablerize'
   gem.authors     = ['Sean Zhu']
-  gem.email       = 'sean.zhu@ifttt.com'
+  gem.email       = 'interestinglythere@gmail.com'
   gem.license     = 'MIT'
 
   gem.add_dependency 'kramdown', '~> 1.2', '>= 1.2.0'

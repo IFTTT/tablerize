@@ -1,25 +1,22 @@
 YAML Tablerize
 ==============
 
-Convert YAML to HTML tables.
+(YAML) Tablerize is a format for writing tables using YAML/JSON-compatible data
+structures, and Ruby code to convert it to HTML.
 
-Usage
------
 
-### Installing
+## Usage
+
+To install
 
 ```shell
 cd yaml-tablerize
 make install
-```
-
-or (soon)
-
-```shell
+# or (soon)
 gem install yaml-tablerize
 ```
 
-### Ruby
+You can use it in Ruby...
 
 ```ruby
 require 'yaml-tablerize'
@@ -30,19 +27,28 @@ puts YamlTablerize.load(yaml_string).to_html
 puts YamlTablerize.make_table(object_from_yaml_or_json).to_html
 ```
 
-
-### Shell
+...or from the command line
 
 ```shell
 yaml-tablerize path/to/yaml-table.yaml [...]
 ```
 
-Why?
-----
 
-Markdown is nice. It helps you write formatted documents in plain text in a way that is meaningful even without rendering. One thing that [the original Markdown specification](http://daringfireball.net/projects/markdown/syntax) doesn't support is tables. But many authors of Markdown documents want to write tables, so Markdown libraries have come up with various but similar ways of representing tables in Markdown.
+## Why?
 
-Tables exist to help you line things up. But Markdown tables force you to either line things up yourself, or deal with the unreadable results. Here's some table Markdown from the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet):
+Markdown is easy on the eyes. It helps you write formatted documents in plain
+text in a way that is meaningful even without rendering. One thing that [the
+original Markdown specification] doesn't support is tables. But many authors
+writing in Markdown want to write tables, so Markdown libraries have come up
+with various but similar ways of representing tables in Markdown.
+
+[the original Markdown specification]: http://daringfireball.net/projects/markdown/syntax
+
+Tables exist to help you line things up. But these Markdown tables force you to
+either line things up yourself, or deal with the unreadable results. Here's some
+a table from the [Markdown Cheatsheet]:
+
+[Markdown Cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 ```
 | Tables        | Are           | Cool  |
@@ -52,7 +58,9 @@ Tables exist to help you line things up. But Markdown tables force you to either
 | zebra stripes | are neat      |    $1 |
 ```
 
-This is pretty readable, but unless you know exactly what the table looks like beforehand, lining everything up takes a lot of time! But that's okay, you don't _actually_ need to do that, you can just have this mess instead:
+This is pretty readable, but unless you know exactly what the table looks like
+beforehand, lining everything up takes a lot of time! But that's okay, you don't
+_actually_ need to do that, you can just have this mess instead:
 
 ```
 Markdown | Less | Pretty
@@ -61,27 +69,50 @@ Markdown | Less | Pretty
 1 | 2 | 3
 ```
 
-Why is this less pretty? Because, while tables exist to organize data, the columns in the above might as well not exist.
+Why is this less pretty? Because, while tables exist to organize data, the data
+looks pretty disorganized here. This goes against the concept of having raw
+Markdown be readable!
 
-Depending what Markdown library you're using, the examples above might not even render. Many flavors of Markdown tables exist, and accept table syntax in varying degrees of leniency. Not only does this make writing tables even harder ("which Markdown library am I using and does it support table feature X?"), but it suggests that these other libraries are just making concessions with the constraints of representing a table in this way. Tables take data, something that should be computer-readable, and make them human-readable. Unrendered Markdown tables, sadly, usually are neither.
+Depending what Markdown library you're using, the examples above might not even
+render. Many flavors of Markdown tables exist, and accept table syntax in
+varying degrees of leniency. Not only does this make writing tables even harder
+("which Markdown library am I using and does it support table feature X?"), but
+it suggests that these these libraries are just making concessions with the
+constraints of representing a table in this way. Tables take data, something
+that should be computer-readable, and make them human-readable. Unrendered
+Markdown tables, sadly, usually are neither.
 
-Oh, and with this traditional syntax, you can pretty much forget about nesting tables.
+Oh, and with this traditional syntax, you can pretty much forget about nesting
+tables.
 
-So what is this?
-----------------
 
-**Tablerize** solves these problems. In its purest form, it is a specification of a _human-readable representation of tables in plain text_. This project also includes a Ruby library and command-line tool to convert this YAML-based format into HTML tables. It can be run with:
+## So what's Tablerize?
+
+**Tablerize** attempts to solve these problems. In its purest form, it is a
+specification of a _human-readable representation of tables in YAML/JSON-
+compatible data_. Since YAML is human-readable, so can Tablerize. This project
+also includes a Ruby library and command-line tool to convert this YAML- based
+format into HTML tables. It can be run with:
 
 ```shell
 yaml-tablerize path/to/yaml-table.yaml [...]
 ```
 
-A complementary project, [kramdown-yaml-tablerize](https://github.com/IFTTT/kramdown-yaml-tablerize), allows embedding of YAML tables into kramdown Markdown documents.
+A complementary project, [kramdown-yaml-tablerize], allows embedding of YAML
+tables into [kramdown] Markdown documents.
 
-Format
-------
+[kramdown]: http://kramdown.gettalong.org/
+[kramdown-yaml-tablerize]: https://github.com/IFTTT/kramdown-yaml-tablerize
 
-I'm searching for "statistics" on Google news, and I find [a Forbes article](http://www.forbes.com/sites/gregorymcneal/2014/06/27/nsa-releases-new-statistical-details-about-surveillance/) with a neat little table I want to type up. Let's try it now: [test/example-1.yml](test/example-1.yml)
+
+## Format
+
+Here's example: Searching for "statistics" on Google news, I come across [a
+Forbes article] with a neat little table I want to type up. Let's try it now
+([test/example-1.yml]):
+
+[a Forbes article]: http://www.forbes.com/sites/gregorymcneal/2014/06/27/nsa-releases-new-statistical-details-about-surveillance/
+[test/example-1.yml]: test/example-1.yml
 
 ```yaml
 class: [statistics-table, nsa-surveillance-details]
@@ -98,7 +129,8 @@ data:
   num_targets: Estimated Number of Targets Affected
 - authority: |
               __FISA Orders__  
-              Based on probable cause (Title I and III of FISA, Sections 703 and 704 of FISA)
+              Based on probable cause
+              (Title I and III of FISA, Sections 703 and 704 of FISA)
   num_orders: "1,167 orders"
   num_targets: "1,144"
 - authority: |
@@ -113,11 +145,15 @@ data:
   num_targets: "319"
 ```
 
-Here's what it looks like as HTML, using a common Markdown stylesheet ("GitHub" on Mou/Macdown):
+Here's what it looks like as HTML, using a common Markdown stylesheet ("GitHub"
+on Mou/Macdown):
 
-![screen shot 2014-06-27 at 11 45 56 pm](https://cloud.githubusercontent.com/assets/1570168/3420046/94909652-fe90-11e3-9330-7eafc78ef17a.png)
+![screenshot](https://cloud.githubusercontent.com/assets/1570168/5449994/b09875c8-84b3-11e4-9a6a-b489a391d221.png)
 
-Here's an example that illustrates most of the features of Tablerize [test/example-2.yml](test/example-2.yml):
+Here's an example that illustrates some of the more advanced features of
+Tablerize ([test/example-2.yml]):
+
+[test/example-2.yml]: test/example-2.yml
 
 ```yaml
 class: [http-spec-exchange, another-class] # this line is optional
@@ -157,40 +193,69 @@ data: # data, by row
 
 With the right CSS, it becomes this:
 
-![screen shot 2014-06-30 at 1 55 35 pm](https://cloud.githubusercontent.com/assets/1570168/3435774/15108594-0099-11e4-8175-d820206c471e.png)
+![screenshot](https://cloud.githubusercontent.com/assets/1570168/3435774/15108594-0099-11e4-8175-d820206c471e.png)
 
-Tips & Caveats
---------------
 
-- YAML tip: Backticks `` ` `` and some other characters need to be quoted because they have special meaing in YAML or are otherwise not allowed to be unquoted by YAML. Other suspicious characters include commas `,`, ampersands `&`, and asterisks `*` and have been implicated in similar crimes. If readability isn't an issue and there's been a syntax error spree in your area, you can go ahead and quote every string just be safe.
+## Tips & Caveats
 
-- Don't use `class` as a column name, since it is used for classes. Unless you really want to. In which case you can. But it still will be used for classes.
+  - YAML tip: Backticks `` ` `` and some other characters need to be quoted
+    because they have special meaing in YAML or are otherwise not allowed to be
+    unquoted by YAML. Other suspicious characters include commas `,`, ampersands
+    `&`, and asterisks `*` and have been implicated in similar crimes. If
+    readability isn't an issue and there's been a syntax error spree in your
+    area, you can go ahead and quote every string just be safe.
 
-- Auto column classes: As a convenience, if a table has a class `my-table` and a column is named `column-1`, then all the cells in the column will have the class `my-table-column-1`. This only happens for the first table class listed. If you don't want this to happen, make the first table class `null`; it will be ignored and columns will not have automatically-generated classes.
+  - Don't use `class` as a column name, since it is used for classes. Unless you
+    really want to. In which case you can. But it still will be used for
+    classes.
 
-Wish List
----------
+  - Auto column classes: As a convenience, if a table has a class `my-table` and
+    a column is named `column-1`, then all the cells in the column will have the
+    class `my-table-column-1`. This only happens for the first table class
+    listed. If you don't want this to happen, make the first table class `null`;
+    it will be ignored and columns will not have automatically-generated
+    classes.
 
-- Support using representing two-column tables as key and value. YAML doesn't support ordered dictionaries, so this will be done by looking at the only key-value pair inside each dictionary in a list:
 
-  ```yaml
-  data:
-  - wake up: done
-  - brush teeth: done
-  - eat breakfast: not done
-  ```
+## The Road Ahead
 
-- Allow HTML attributes to be placed anywhere classes currently can.
+  - Support using representing two-column tables as key and value. YAML doesn't
+    support ordered dictionaries, so this will be done by looking at the only
+    key- value pair inside each dictionary in a list:
 
-- Allow arbitrary HTML _and_ tables as siblings together inside cells.
+    ```yaml
+    data:
+    - wake up: done
+    - brush teeth: done
+    - eat breakfast: not done
+    ```
 
-- Allow empty cells to be created by simply not including keys or making keys with no value (represented as `null`/`nil`/`None`). Possibly add a "strict mode" setting that causes these to error instead.
+  - Allow HTML attributes to be placed anywhere classes currently can.
 
-- Support `thead` and `tfoot`. Perhaps add support `tbody`, which will be a synonym for `data`.
+  - Allow arbitrary HTML _and_ tables as siblings together inside cells. This
+    will probably be implemented by recursively calling [kramdown-yaml-
+    tablerize], if installed.
 
-- Allow outputting to Markdown, for GitHub and other sites that don't allow HTML in Markdown.
+  - Allow empty cells to be created by simply not including keys or making keys
+    with no value (represented as `null`/`nil`/`None`). Possibly add a "strict
+    mode" setting that causes these to error instead.
 
-Credit
-------
+  - Support `thead` and `tfoot`. Perhaps add support `tbody`, which will be a
+    synonym for `data`.
 
-**YAML Tablerize** was designed and written by [@szhu](https://github.com/szhu) at [@IFTTT](https://github.com/IFTTT).
+  -  For simple tables, allow outputting to Markdown, for GitHub and other sites
+     that don't allow HTML in Markdown.
+
+  - [textmate/yaml.tmbundle], the YAML syntax highlighter used by TextMate,
+    Sublime Text, and GitHub isn't perfect. Fix the plugin and use the examples
+    in this README as test cases.
+
+[textmate/yaml.tmbundle]: https://github.com/textmate/yaml.tmbundle
+
+## Credit
+
+**YAML Tablerize** was originally designed and written by [@szhu] at [@IFTTT].
+
+ [rfc1459/kramdown-gist]: https://github.com/rfc1459/kramdown-gist
+ [@szhu]: https://github.com/szhu
+ [@IFTTT]: https://github.com/IFTTT
