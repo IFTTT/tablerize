@@ -1,6 +1,11 @@
-module YamlTablerize
-  # A piece of raw HTML inside a HtmlElement-like object that responds to to_html.
-  class RawHtmlElement
+require 'erb'
+
+module Tablerize
+  class HtmlElement
+  end
+
+  # A RawHtmlElement represents arbitrary HTML.
+  class RawHtmlElement < HtmlElement
     attr_reader :html
     alias_method :to_html, :html
 
@@ -10,8 +15,9 @@ module YamlTablerize
   end
   NEWLINE = RawHtmlElement.new("\n")
 
-  # Class for constructing arbitrary non-self-closing HTML elements.
-  class HtmlElement
+  # A StructuredHtmlElement represents HTML tags enclosing an array of
+  # HtmlElements.
+  class StructuredHtmlElement < HtmlElement
     attr_accessor :tag
     attr_reader :attrs, :classes, :children
 
@@ -42,12 +48,12 @@ module YamlTablerize
 
     def add_single_class(klass)
       return if klass.nil? || klass.empty?
-      @classes << klass unless @classes.include? klass
+      return if @classes.include? klass
+      @classes << klass
     end
 
     def attrs_html(attrs)
-      out = ''
-      out << %( class="#{h @classes.join ' '}")  if @classes.length > 0
+      out =  %( class="#{ERB::Util.h @classes.join(' ')}")  if @classes.length > 0
       attrs.each do |attr, value|
         out << %( #{attr}="#{h value}")
       end
@@ -55,7 +61,7 @@ module YamlTablerize
     end
 
     def inner_html
-      @children.map { |child| child.to_html }.join ''
+      @children.map(&:to_html).join('')
     end
   end
 end

@@ -1,7 +1,7 @@
-YAML Tablerize
-==============
+Tablerize
+=========
 
-(YAML) Tablerize is a format for writing tables using YAML/JSON-compatible data
+Tablerize is a format for writing tables using YAML/JSON-compatible data
 structures, and Ruby code to convert it to HTML.
 
 
@@ -10,27 +10,27 @@ structures, and Ruby code to convert it to HTML.
 To install
 
 ```shell
-cd yaml-tablerize
+cd tablerize
 make install
 # or (soon)
-gem install yaml-tablerize
+gem install tablerize
 ```
 
 You can use it in Ruby...
 
 ```ruby
-require 'yaml-tablerize'
-puts YamlTablerize.load_file(path).to_html
+require 'tablerize'
+puts Tablerize.load_file(path).to_html
 # or
-puts YamlTablerize.load(yaml_string).to_html
+puts Tablerize.load(yaml_string).to_html
 # or
-puts YamlTablerize.make_table(object_from_yaml_or_json).to_html
+puts Tablerize.make_table(object_from_yaml_or_json).to_html
 ```
 
 ...or from the command line
 
 ```shell
-yaml-tablerize path/to/yaml-table.yaml [...]
+tablerize path/to/yaml-table.yml [...]
 ```
 
 
@@ -95,24 +95,24 @@ also includes a Ruby library and command-line tool to convert this YAML- based
 format into HTML tables. It can be run with:
 
 ```shell
-yaml-tablerize path/to/yaml-table.yaml [...]
+tablerize path/to/yaml-table.yml [...]
 ```
 
-A complementary project, [kramdown-yaml-tablerize], allows embedding of YAML
+A complementary project, [kramdown_tablerize], allows embedding of YAML
 tables into [kramdown] Markdown documents.
 
 [kramdown]: http://kramdown.gettalong.org/
-[kramdown-yaml-tablerize]: https://github.com/IFTTT/kramdown-yaml-tablerize
+[kramdown_tablerize]: https://github.com/szhu/kramdown_tablerize
 
 
 ## Format
 
 Here's example: Searching for "statistics" on Google news, I come across [a
 Forbes article] with a neat little table I want to type up. Let's try it now
-([test/example-1.yml]):
+([examples/example-1.yml]):
 
 [a Forbes article]: http://www.forbes.com/sites/gregorymcneal/2014/06/27/nsa-releases-new-statistical-details-about-surveillance/
-[test/example-1.yml]: test/example-1.yml
+[examples/example-1.yml]: examples/example-1.yml
 
 ```yaml
 class: [statistics-table, nsa-surveillance-details]
@@ -151,9 +151,9 @@ on Mou/Macdown):
 ![screenshot](https://cloud.githubusercontent.com/assets/1570168/5449994/b09875c8-84b3-11e4-9a6a-b489a391d221.png)
 
 Here's an example that illustrates some of the more advanced features of
-Tablerize ([test/example-2.yml]):
+Tablerize ([examples/example-2.yml]):
 
-[test/example-2.yml]: test/example-2.yml
+[examples/example-2.yml]: examples/example-2.yml
 
 ```yaml
 class: [http-spec-exchange, another-class] # this line is optional
@@ -254,7 +254,7 @@ With the right CSS, it becomes this:
 
 ## Credit
 
-**YAML Tablerize** was originally designed and written by [@szhu] at [@IFTTT].
+**Tablerize** was originally designed and written by [@szhu] at [@IFTTT].
 
  [rfc1459/kramdown-gist]: https://github.com/rfc1459/kramdown-gist
  [@szhu]: https://github.com/szhu
