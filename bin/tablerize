@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# Command-line interface to the tablerize gem.
+
+if ARGV.empty?
+  $stderr.puts "usage: #{$PROGRAM_NAME} path/to/yaml-table.yml [...]"
+  exit 1
+end
+
+begin
+  require_relative '../lib/tablerize'
+rescue LoadError
+  require 'tablerize'
+end
+
+ARGV.each do |path|
+  puts Tablerize.load_file(path).to_html
+end
