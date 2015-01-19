@@ -10,9 +10,9 @@ Gem::Specification.new do |gem|
 
   gem.version       = Tablerize::VERSION
 
-  gem.homepage      = 'https://github.com/szhu/tablerize'
+  gem.homepage      = 'https://github.com/IFTTT/tablerize'
   gem.authors       = ['Sean Zhu']
-  gem.email         = 'interestinglythere@gmail.com'
+  gem.email         = 'opensource+tablerize@szhu.me'
   gem.license       = 'MIT'
 
   gem.add_dependency 'kramdown', '~> 1.2', '>= 1.2.0'

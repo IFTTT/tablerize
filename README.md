@@ -98,11 +98,11 @@ format into HTML tables. It can be run with:
 tablerize path/to/yaml-table.yml [...]
 ```
 
-A complementary project, [kramdown_tablerize], allows embedding of YAML
+A complementary project, [kramdown-tablerize], allows embedding of YAML
 tables into [kramdown] Markdown documents.
 
 [kramdown]: http://kramdown.gettalong.org/
-[kramdown_tablerize]: https://github.com/szhu/kramdown_tablerize
+[kramdown-tablerize]: https://github.com/IFTTT/kramdown-tablerize
 
 
 ## Format
@@ -247,8 +247,11 @@ With the right CSS, it becomes this:
      that don't allow HTML in Markdown.
 
   - [textmate/yaml.tmbundle], the YAML syntax highlighter used by TextMate,
-    Sublime Text, and GitHub isn't perfect. Fix the plugin and use the examples
-    in this README as test cases.
+    Sublime Text, and GitHub isn't perfect. Fix the plugin and use the
+    examples in this README as test cases. _Update: GitHub now highlights the
+    YAML in this file almost correctly, but [textmate/yaml.tmbundle] doesn't
+    seem to be updated. GitHub's probably using something else to do syntax
+    highlighting._
 
 [textmate/yaml.tmbundle]: https://github.com/textmate/yaml.tmbundle
 
@@ -256,6 +259,6 @@ With the right CSS, it becomes this:
 
 **Tablerize** was originally designed and written by [@szhu] at [@IFTTT].
 
- [rfc1459/kramdown-gist]: https://github.com/rfc1459/kramdown-gist
- [@szhu]: https://github.com/szhu
- [@IFTTT]: https://github.com/IFTTT
+[rfc1459/kramdown-gist]: https://github.com/rfc1459/kramdown-gist
+[@szhu]: https://github.com/szhu
+[@IFTTT]: https://github.com/IFTTT
