@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.email         = 'opensource+tablerize@szhu.me'
   gem.license       = 'MIT'
 
+  gem.required_ruby_version = '>= 1.9.3'
   gem.add_dependency 'kramdown', '~> 1.2', '>= 1.2.0'
   gem.executables   = ['tablerize']
   gem.files         = `git ls-files`.split
