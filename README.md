@@ -1,6 +1,8 @@
 Tablerize
 =========
 
+[![Build Status](https://travis-ci.org/IFTTT/tablerize.svg)](https://travis-ci.org/IFTTT/tablerize)
+
 ```shell
 gem install tablerize
 ```
