@@ -1,20 +1,15 @@
 Tablerize
 =========
 
+```shell
+gem install tablerize
+```
+
 Tablerize is a format for writing tables using YAML/JSON-compatible data
 structures, and Ruby code to convert it to HTML.
 
 
 ## Usage
-
-To install
-
-```shell
-cd tablerize
-make install
-# or (soon)
-gem install tablerize
-```
 
 You can use it in Ruby...
 
