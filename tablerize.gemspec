@@ -2,10 +2,10 @@ require './lib/tablerize/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'tablerize'
-  gem.summary       = 'Convert YAML to HTML tables.'
+  gem.summary       = 'Say goodbye to aligning tables in Markdown.'
   gem.description   = <<-END
-      Tablerize converts YAML to HTML tables. Say goodbye to aligning tables
-      in Markdown.
+      Tablerize is a format for writing tables using YAML/JSON-compatible data
+      structures, and Ruby code to convert it to HTML.
     END
 
   gem.version       = Tablerize::VERSION
