@@ -86,10 +86,10 @@ tables.
 ## So what's Tablerize?
 
 **Tablerize** attempts to solve these problems. In its purest form, it is a
-specification of a _human-readable representation of tables in YAML/JSON-
-compatible data_. Since YAML is human-readable, so can Tablerize. This project
-also includes a Ruby library and command-line tool to convert this YAML- based
-format into HTML tables. It can be run with:
+specification of a _human-readable representation of tables in
+YAML/JSON- compatible data_. Since YAML is human-readable, so is Tablerize.
+This project also includes a Ruby library and command-line tool to convert
+this YAML-based format into HTML tables. It can be run with:
 
 ```shell
 tablerize path/to/yaml-table.yml [...]
@@ -216,9 +216,9 @@ With the right CSS, it becomes this:
 
 ## The Road Ahead
 
-  - Support using representing two-column tables as key and value. YAML doesn't
-    support ordered dictionaries, so this will be done by looking at the only
-    key- value pair inside each dictionary in a list:
+  - Support using representing two-column tables as key and value. YAML
+    doesn't support ordered dictionaries, so this will be done by looking at
+    the only key-value pair inside each dictionary in a list:
 
     ```yaml
     data:
@@ -230,8 +230,8 @@ With the right CSS, it becomes this:
   - Allow HTML attributes to be placed anywhere classes currently can.
 
   - Allow arbitrary HTML _and_ tables as siblings together inside cells. This
-    will probably be implemented by recursively calling [kramdown-yaml-
-    tablerize], if installed.
+    will probably be implemented by recursively calling [kramdown-tablerize],
+    if installed.
 
   - Allow empty cells to be created by simply not including keys or making keys
     with no value (represented as `null`/`nil`/`None`). Possibly add a "strict
