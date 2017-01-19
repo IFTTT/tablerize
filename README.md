@@ -1,6 +1,9 @@
 Tablerize
 =========
 
+## Deprecated
+This project is not being developed. Feel free to fork!
+
 [![Build Status](https://travis-ci.org/IFTTT/tablerize.svg)](https://travis-ci.org/IFTTT/tablerize)
 
 ```shell
